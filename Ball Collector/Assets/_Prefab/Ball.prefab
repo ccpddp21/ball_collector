@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85f0b509201e9b4997e6bba5a8285c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundDetectorPoint: {fileID: 5947106543581466572}

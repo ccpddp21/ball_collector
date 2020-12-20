@@ -11,7 +11,7 @@ public class BallStatusCanvas : MonoBehaviour
     [SerializeField] private Image _ballStatusImage;
 
     private Color _defaultColor = Color.white;
-    private Color _foundColor = new Color(255, 180, 30, 255);
+    private Color32 _foundColor = new Color32(255, 180, 30, 255);
 
     // Start is called before the first frame update
     void Start()

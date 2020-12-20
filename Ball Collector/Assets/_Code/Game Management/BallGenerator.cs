@@ -10,6 +10,7 @@ public class BallGenerator : MonoBehaviour
     [SerializeField] private List<string> _ballLocationList = new List<string>();
     [SerializeField] private GameObject _ballPoolContainer;
 
+    private string _levelCenter;
     private string _ballLocation;
     private int _randX, _randZ;
 
@@ -20,6 +21,10 @@ public class BallGenerator : MonoBehaviour
 
     public void GenerateBalls()
     {
+        Vector3 center = (LevelManager.Singleton.BoundaryMin + LevelManager.Singleton.BoundaryMax) / 2;
+        _levelCenter = string.Format("{0},{1},{2}", center.x, center.y, center.z);
+        _ballLocationList.Add(_levelCenter);
+
         for (int i = 0; i < _ballPoolContainer.transform.childCount; i++)
         {
             do
