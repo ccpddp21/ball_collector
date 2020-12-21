@@ -11,8 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        _speed = 15;
-        _speedMultiplier = 1.5f;
+        _speed = 10;
+        _speedMultiplier = 2f;
     }
 
     // Update is called once per frame
@@ -26,11 +26,10 @@ public class PlayerMovement : MonoBehaviour
         
         if (_verticalVal != 0)
         {
-            _verticalVal = Input.GetKey(KeyCode.LeftShift) ? _verticalVal * _speedMultiplier : _verticalVal;
+            _verticalVal = Input.GetKey(KeyCode.LeftShift) && DetectGround() ? _verticalVal * _speedMultiplier : _verticalVal;
+            
             MoveForward(_verticalVal);
-        }
-
-        
+        }        
     }
 
     private void MoveForward(float axisVal)
@@ -41,5 +40,18 @@ public class PlayerMovement : MonoBehaviour
     private void Strafe(float axisVal)
     {
         this.transform.Translate(new Vector3(1, 0, 0) * axisVal * Time.deltaTime * _speed);
+    }
+    private bool DetectGround()
+    {
+        Ray ray = new Ray(this.transform.position, new Vector3(0, -1, 0));
+
+        if (Physics.Raycast(ray, 1.1f, LayerMask.GetMask("Ground")))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -23,6 +23,7 @@ public class CanvasManager : MonoBehaviour
             {
                 canvas.enabled = false;
             }
+            _titleCanvas.gameObject.SetActive(false);
         }
 
         if (_hudCanvas.enabled)
@@ -32,6 +33,7 @@ public class CanvasManager : MonoBehaviour
             {
                 canvas.enabled = false;
             }
+            _hudCanvas.gameObject.SetActive(false);
         }
 
         if (_pauseCanvas.enabled)
@@ -41,6 +43,7 @@ public class CanvasManager : MonoBehaviour
             {
                 canvas.enabled = false;
             }
+            _pauseCanvas.gameObject.SetActive(false);
         }
 
         if (_winLoseCanvas.enabled)
@@ -50,12 +53,14 @@ public class CanvasManager : MonoBehaviour
             {
                 canvas.enabled = false;
             }
+            _winLoseCanvas.gameObject.SetActive(false);
         }
     }
 
     public void ShowTitleCanvas()
     {
         HideCanvases();
+        _titleCanvas.gameObject.SetActive(true);
         _titleCanvas.enabled = true;
         foreach (Canvas canvas in _titleCanvas.GetComponentsInChildren<Canvas>())
         {
@@ -66,6 +71,7 @@ public class CanvasManager : MonoBehaviour
     public void ShowHudCanvas()
     {
         HideCanvases();
+        _hudCanvas.gameObject.SetActive(true);
         _hudCanvas.enabled = true;
         foreach (Canvas canvas in _hudCanvas.GetComponentsInChildren<Canvas>())
         {
@@ -75,6 +81,7 @@ public class CanvasManager : MonoBehaviour
     public void ShowPauseCanvas()
     {
         HideCanvases();
+        _pauseCanvas.gameObject.SetActive(true);
         _pauseCanvas.enabled = true;
         foreach (Canvas canvas in _pauseCanvas.GetComponentsInChildren<Canvas>())
         {
@@ -85,6 +92,7 @@ public class CanvasManager : MonoBehaviour
     public void ShowWinLoseCanvas()
     {
         HideCanvases();
+        _winLoseCanvas.gameObject.SetActive(true);
         _winLoseCanvas.enabled = true;
         foreach (Canvas canvas in _winLoseCanvas.GetComponentsInChildren<Canvas>())
         {

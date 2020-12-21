@@ -11,7 +11,7 @@ public class GameTimerCanvas : MonoBehaviour
     [SerializeField] private IntegerVariable _gameTimerVariable;
     [SerializeField] private TextMeshProUGUI _gameTimerText;
 
-    private int _defaultTime = 10;
+    private int _defaultTime = 15;
     private float _timer;
 
     // Start is called before the first frame update
@@ -45,6 +45,6 @@ public class GameTimerCanvas : MonoBehaviour
 
     public void AddTime()
     {
-        _timer += 5;
+        _timer += 4;
     }
 }

@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
-        _xSensitivity = _ySensitivity = 10;
+        _xSensitivity = _ySensitivity = 15;
     }
 
     // Update is called once per frame

@@ -25,7 +25,7 @@ public class GameStateManager : MonoBehaviour
     {
         if (!_gameStartedVariable.RuntimeValue)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Return))
             {
                 StartNewGame();
             }
