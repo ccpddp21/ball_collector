@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        _speed = 10;
+        _speed = 15;
         _speedMultiplier = 1.5f;
     }
 

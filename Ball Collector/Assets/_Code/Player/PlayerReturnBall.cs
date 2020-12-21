@@ -6,6 +6,7 @@ public class PlayerReturnBall : MonoBehaviour
 {
     [SerializeField] private GameEvent _ballReturnedEvent;
     [SerializeField] private GameEvent _ballsClearedEvent;
+    [SerializeField] private GameEvent _gameWonEvent;
     [SerializeField] private BooleanVariable _hasBallVariable;
     [SerializeField] private IntegerVariable _ballsCollectedVariable;
     [SerializeField] private IntegerVariable _ballsRemainingVariable;
@@ -19,10 +20,15 @@ public class PlayerReturnBall : MonoBehaviour
             _ballsRemainingVariable.RuntimeValue -= 1;
             _ballReturnedEvent.Raise();
 
-            if (_ballsRemainingVariable.RuntimeValue <= 0)
+            if (_ballsCollectedVariable.RuntimeValue >= 10)
+            {
+                _gameWonEvent.Raise();
+            } 
+            else if (_ballsRemainingVariable.RuntimeValue <= 0)
             {
                 _ballsClearedEvent.Raise();
             }
+            
         }
     }
 }

@@ -19,7 +19,7 @@ public class PlayerJump : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _jumpForce = 5;
+        _jumpForce = 7;
     }
 
     // Update is called once per frame
