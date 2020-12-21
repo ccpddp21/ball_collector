@@ -21,7 +21,6 @@ public class BallController : MonoBehaviour
 
     void OnDisable()
     {
-        Debug.Log("dis");
         this.transform.localPosition = new Vector3(0, 0, 0);
     }
 

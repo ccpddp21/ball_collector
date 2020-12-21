@@ -16,4 +16,9 @@ public class PlayerCollectBall : MonoBehaviour
             other.gameObject.SetActive(false);
         }
     }
+
+    public void ResetHasBall()
+    {
+        _hasBallVariable.RuntimeValue = false;
+    }
 }
