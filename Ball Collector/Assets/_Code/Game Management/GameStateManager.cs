@@ -9,6 +9,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private GameEvent _gameStartedEvent;
     [SerializeField] private GameEvent _gamePausedEvent;
     [SerializeField] private GameEvent _gameUnpausedEvent;
+    [SerializeField] private GameEvent _gameResetEvent;
     [SerializeField] private GameEvent _gameEndedEvent;
     [SerializeField] private BooleanVariable _gameStartedVariable;
     [SerializeField] private BooleanVariable _gamePausedVariable;
@@ -62,6 +63,13 @@ public class GameStateManager : MonoBehaviour
     {
         _gameUnpausedEvent.Raise();
         _gamePausedVariable.RuntimeValue = false;
+    }
+
+    public void ResetGame()
+    {
+        _gameResetEvent.Raise();
+        _gamePausedVariable.RuntimeValue = false;
+        _gameStartedVariable.RuntimeValue = true;
     }
 
     public void EndGame()

@@ -21,6 +21,8 @@ public class BallGenerator : MonoBehaviour
 
     public void GenerateBalls()
     {
+        _ballsRemaining.RuntimeValue = 0;
+
         Vector3 center = (LevelManager.Singleton.BoundaryMin + LevelManager.Singleton.BoundaryMax) / 2;
         _levelCenter = string.Format("{0},{1},{2}", center.x, center.y, center.z);
         _ballLocationList.Add(_levelCenter);

@@ -6,8 +6,10 @@ using TMPro;
 
 public class BallStatusCanvas : MonoBehaviour
 {
+    [SerializeField] private IntegerVariable _ballsRemainingVariable;
     [SerializeField] private GameObject _findBallText;
     [SerializeField] private GameObject _returnBallText;
+    [SerializeField] private TextMeshProUGUI _ballsLeftText;
     [SerializeField] private Image _ballStatusImage;
 
     private Color _defaultColor = Color.white;
@@ -31,5 +33,10 @@ public class BallStatusCanvas : MonoBehaviour
         _returnBallText.SetActive(false);
         _findBallText.SetActive(true);
         _ballStatusImage.color = _defaultColor;
+    }
+
+    public void UpdateBallsRemaining()
+    {
+        _ballsLeftText.text = _ballsRemainingVariable.RuntimeValue.ToString();
     }
 }

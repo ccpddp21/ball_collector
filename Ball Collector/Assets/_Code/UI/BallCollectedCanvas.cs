@@ -13,4 +13,10 @@ public class BallCollectedCanvas : MonoBehaviour
     {
         _ballsCollectedText.text = _ballsCollectedVariable.RuntimeValue.ToString();
     }
+
+    public void ResetScore()
+    {
+        _ballsCollectedVariable.RuntimeValue = 0;
+        _ballsCollectedText.text = "0";
+    }
 }
