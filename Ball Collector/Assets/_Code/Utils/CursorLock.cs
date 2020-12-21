@@ -20,6 +20,6 @@ public class CursorLock : MonoBehaviour
 
     public void UnlockCursor()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

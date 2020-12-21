@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    [SerializeField] private BooleanVariable _gamePausedVariable;
     private float _mouseXVal;
     private float _mouseYVal;
     private Vector3 xRot;
@@ -21,10 +22,10 @@ public class CameraMovement : MonoBehaviour
         _mouseXVal = Input.GetAxis("Mouse X");
         _mouseYVal = Input.GetAxis("Mouse Y");
 
-        if (_mouseXVal != 0)
+        if (_mouseXVal != 0 && !_gamePausedVariable.RuntimeValue)
             Turn(_mouseXVal);
 
-        if (_mouseYVal != 0)
+        if (_mouseYVal != 0 && !_gamePausedVariable.RuntimeValue)
             Pitch(_mouseYVal);
     }
 

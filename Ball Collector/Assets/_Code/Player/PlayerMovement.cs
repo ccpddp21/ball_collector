@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private BooleanVariable _gamePausedVariable;
+
     private float _speed;
     private float _speedMultiplier;
     private float _horizontalVal;
@@ -21,10 +23,10 @@ public class PlayerMovement : MonoBehaviour
         _horizontalVal = Input.GetAxis("Horizontal");
         _verticalVal = Input.GetAxis("Vertical");
 
-        if (_horizontalVal != 0)
+        if (_horizontalVal != 0 && !_gamePausedVariable.RuntimeValue)
             Strafe(_horizontalVal);
         
-        if (_verticalVal != 0)
+        if (_verticalVal != 0&& !_gamePausedVariable.RuntimeValue)
         {
             _verticalVal = Input.GetKey(KeyCode.LeftShift) && DetectGround() ? _verticalVal * _speedMultiplier : _verticalVal;
             

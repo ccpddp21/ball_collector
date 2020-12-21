@@ -29,6 +29,10 @@ public class GameStateManager : MonoBehaviour
             {
                 StartNewGame();
             }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Application.Quit();
+            }
         }
         else if (_gameStartedVariable.RuntimeValue)
         {
