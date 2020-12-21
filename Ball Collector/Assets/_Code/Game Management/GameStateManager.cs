@@ -16,13 +16,20 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartNewGame();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_gameStartedVariable.RuntimeValue)
+        if (!_gameStartedVariable.RuntimeValue)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StartNewGame();
+            }
+        }
+        else if (_gameStartedVariable.RuntimeValue)
         {
             if (Input.GetKeyDown(KeyCode.P))
             {

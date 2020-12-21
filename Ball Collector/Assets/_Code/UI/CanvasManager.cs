@@ -4,15 +4,72 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Canvas _titleCanvas;
+    [SerializeField] private Canvas _hudCanvas;
+    [SerializeField] private Canvas _pauseCanvas;
+
+    void Awake()
     {
-        
+        ShowTitleCanvas();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HideCanvases()
     {
-        
+        if (_titleCanvas.enabled)
+        {
+            _titleCanvas.enabled = false;
+            foreach (Canvas canvas in _titleCanvas.GetComponentsInChildren<Canvas>())
+            {
+                canvas.enabled = false;
+            }
+        }
+
+        if (_hudCanvas.enabled)
+        {
+            _hudCanvas.enabled = false;
+            foreach (Canvas canvas in _hudCanvas.GetComponentsInChildren<Canvas>())
+            {
+                canvas.enabled = false;
+            }
+        }
+
+        if (_pauseCanvas.enabled)
+        {
+            _pauseCanvas.enabled = false;
+            foreach (Canvas canvas in _pauseCanvas.GetComponentsInChildren<Canvas>())
+            {
+                canvas.enabled = false;
+            }
+        }
+
+    }
+
+    public void ShowTitleCanvas()
+    {
+        HideCanvases();
+        _titleCanvas.enabled = true;
+        foreach (Canvas canvas in _titleCanvas.GetComponentsInChildren<Canvas>())
+        {
+            canvas.enabled = true;
+        }
+    }
+
+    public void ShowHudCanvas()
+    {
+        HideCanvases();
+        _hudCanvas.enabled = true;
+        foreach (Canvas canvas in _hudCanvas.GetComponentsInChildren<Canvas>())
+        {
+            canvas.enabled = true;
+        }
+    }
+    public void ShowPauseCanvas()
+    {
+        HideCanvases();
+        _pauseCanvas.enabled = true;
+        foreach (Canvas canvas in _pauseCanvas.GetComponentsInChildren<Canvas>())
+        {
+            canvas.enabled = true;
+        }
     }
 }

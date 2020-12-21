@@ -32,7 +32,7 @@ public class CameraMovement : MonoBehaviour
     {
         xRot = this.transform.localRotation.eulerAngles;
         xRot.x = xRot.x < 360 && xRot.x >= 300 ? xRot.x - 360 : xRot.x;
-        xRot.x = Mathf.Clamp(xRot.x + axisVal, -10, 20);
+        xRot.x = Mathf.Clamp(xRot.x + axisVal, 0, 10);
         this.transform.localRotation = Quaternion.Euler(xRot);
     }
 

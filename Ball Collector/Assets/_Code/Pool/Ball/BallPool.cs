@@ -20,4 +20,12 @@ public class BallPool : MonoBehaviour
             _ballPoolList.Add(this.transform.GetChild(i).gameObject);
         }
     }
+
+    public void ResetPool()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            this.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
 }

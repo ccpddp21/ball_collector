@@ -9,6 +9,8 @@ public class CursorLock : MonoBehaviour
     void Awake()
     {
         Singleton = this;
+
+        LockCursor();
     }
 
     public void LockCursor()
