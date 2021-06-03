@@ -7,6 +7,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
 
     private float _jumpForce;
+    [SerializeField] private float _velocityX;
+    [SerializeField] private float _velocityZ;
 
     void Awake()
     {
@@ -24,6 +26,9 @@ public class PlayerJump : MonoBehaviour
 
     void FixedUpdate()
     {
+        _velocityX = _rigidbody.velocity.x;
+        _velocityZ = _rigidbody.velocity.z;
+
         if (Input.GetKeyDown(KeyCode.Space) && DetectGround())
         {
             Jump();
@@ -32,7 +37,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump()
     {
-        _rigidbody.AddForce(new Vector3(0, _jumpForce, 0), ForceMode.Impulse);
+        _rigidbody.AddForce(new Vector3(_velocityX, _jumpForce, _velocityZ), ForceMode.Impulse);
     }
 
     private bool DetectGround()
