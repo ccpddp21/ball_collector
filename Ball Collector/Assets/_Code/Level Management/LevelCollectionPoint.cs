@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelCollectionPoint : MonoBehaviour
 {
+    [SerializeField] private GameObject _beam;
+
     void Awake()
     {
         Deactivate();
@@ -11,11 +13,11 @@ public class LevelCollectionPoint : MonoBehaviour
 
     public void Activate()
     {
-        this.gameObject.SetActive(true);
+        _beam.SetActive(true);
     }
 
     public void Deactivate()
     {
-        this.gameObject.SetActive(false);
+        _beam.SetActive(false);
     }
 }
