@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private BooleanVariable _gamePausedVariable;
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Transform _detector;
 
     private float _speed;
     private float _speedMultiplier;
@@ -25,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_rigidbody == null)
             _rigidbody = GetComponent<Rigidbody>();
+
+        if (_animator == null)
+            _animator = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -33,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         _speed = 10;
         _speedMultiplier = 2f;
 
-        _groundRay = new Ray(transform.position, new Vector3(0, -1, 0));
+        _groundRay = new Ray(_detector.position, new Vector3(0, -1, 0));
     }
 
     void FixedUpdate()
@@ -47,16 +52,50 @@ public class PlayerMovement : MonoBehaviour
         if (_horizontalVal != 0 && !_gamePausedVariable.RuntimeValue && _canMove)
         {
             if ((_horizontalVal > 0 && !TouchingRight) || (_horizontalVal < 0 && !TouchingLeft))
+            {
+                // _animator.SetBool("IsWalk", true);
                 Strafe(_horizontalVal);
+            }
+            else
+            {
+                // _animator.SetBool("IsWalk", false);
+            }
+        }
+        else
+        {
+            // _animator.SetBool("IsWalk", false);
         }
 
 
         if (_verticalVal != 0 && !_gamePausedVariable.RuntimeValue && _canMove)
         {
-            _verticalVal = Input.GetKey(KeyCode.LeftShift) ? _verticalVal * _speedMultiplier : _verticalVal;
-
             if ((_verticalVal > 0 && !TouchingForward) || (_verticalVal < 0 && !TouchingBackward))
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    _verticalVal = _verticalVal * _speedMultiplier;
+                    if (_onGround)
+                    {
+                        _animator.SetBool("IsWalk", false);
+                        _animator.SetBool("IsSprint", true);
+                    }
+                }
+                else
+                {
+                    if (_onGround)
+                    {
+                        _animator.SetBool("IsSprint", false);
+                        _animator.SetBool("IsWalk", true);
+                    }
+                }
+
                 MoveForward(_verticalVal);
+            }
+        }
+        else
+        {
+            _animator.SetBool("IsWalk", false);
+            _animator.SetBool("IsSprint", false);
         }
 
         if (!_onGround && ((TouchingForward || TouchingBackward || TouchingRight || TouchingLeft)))
@@ -77,30 +116,30 @@ public class PlayerMovement : MonoBehaviour
 
     private bool DetectGround()
     {
-        Vector3 pos = transform.position;
+        Vector3 pos = _detector.position;
         _groundRay.origin = pos;
         if (Physics.Raycast(_groundRay, 1.1f, LayerMask.GetMask("Ground")))
             return true;
 
-        pos = transform.position;
+        pos = _detector.position;
         pos.z += 1f;
         _groundRay.origin = pos;
         if (Physics.Raycast(_groundRay, 1.1f, LayerMask.GetMask("Ground")))
             return true;
 
-        pos = transform.position;
+        pos = _detector.position;
         pos.z -= 1f;
         _groundRay.origin = pos;
         if (Physics.Raycast(_groundRay, 1.1f, LayerMask.GetMask("Ground")))
             return true;
 
-        pos = transform.position;
+        pos = _detector.position;
         pos.x += 1f;
         _groundRay.origin = pos;
         if (Physics.Raycast(_groundRay, 1.1f, LayerMask.GetMask("Ground")))
             return true;
 
-        pos = transform.position;
+        pos = _detector.position;
         pos.x -= 1f;
         _groundRay.origin = pos;
         if (Physics.Raycast(_groundRay, 1.1f, LayerMask.GetMask("Ground")))
@@ -111,14 +150,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void DetectObstruction()
     {
-        TouchingForward = Physics.Raycast(transform.position, transform.forward, 1f, LayerMask.GetMask("Ground"));
-        TouchingBackward = Physics.Raycast(transform.position, -transform.forward, 1f, LayerMask.GetMask("Ground"));
-        TouchingRight = Physics.Raycast(transform.position, transform.right, 1f, LayerMask.GetMask("Ground"));
-        TouchingLeft = Physics.Raycast(transform.position, -transform.right, 1f, LayerMask.GetMask("Ground"));
+        TouchingForward = Physics.Raycast(_detector.position, transform.forward, 1f, LayerMask.GetMask("Ground"));
+        TouchingBackward = Physics.Raycast(_detector.position, -transform.forward, 1f, LayerMask.GetMask("Ground"));
+        TouchingRight = Physics.Raycast(_detector.position, transform.right, 1f, LayerMask.GetMask("Ground"));
+        TouchingLeft = Physics.Raycast(_detector.position, -transform.right, 1f, LayerMask.GetMask("Ground"));
 
-        TouchingRight = TouchingForward = Physics.Raycast(transform.position, (transform.right + transform.forward), 1f, LayerMask.GetMask("Ground"));
-        TouchingRight = TouchingBackward = Physics.Raycast(transform.position, (transform.right + -transform.forward), 1f, LayerMask.GetMask("Ground"));
-        TouchingLeft = TouchingForward = Physics.Raycast(transform.position, (-transform.right + transform.forward), 1f, LayerMask.GetMask("Ground"));
-        TouchingLeft = TouchingBackward = Physics.Raycast(transform.position, (-transform.right + -transform.forward), 1f, LayerMask.GetMask("Ground"));
+        TouchingRight = TouchingForward = Physics.Raycast(_detector.position, (transform.right + transform.forward), 1f, LayerMask.GetMask("Ground"));
+        TouchingRight = TouchingBackward = Physics.Raycast(_detector.position, (transform.right + -transform.forward), 1f, LayerMask.GetMask("Ground"));
+        TouchingLeft = TouchingForward = Physics.Raycast(_detector.position, (-transform.right + transform.forward), 1f, LayerMask.GetMask("Ground"));
+        TouchingLeft = TouchingBackward = Physics.Raycast(_detector.position, (-transform.right + -transform.forward), 1f, LayerMask.GetMask("Ground"));
     }
 }
