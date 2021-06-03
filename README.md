@@ -1,7 +1,9 @@
-Create a unity project that generates balls randomly around a scene. The user must collect the
-balls and bring each of them to a 'collection' point. Keep track of how many balls have been
-collected. All code should be in C#.
+# Ball Collector
 
-Break down and estimate necessary tasks to complete.
+Simple sample Unity project.
 
-Submit a copy of the project and the built output.
+## Objective:
+
+Collect 10 balls before time runs out. Player must grab one ball at a time and return each back to
+this "Collection Point". Every ball successfully collected adds time to the game timer.
+
