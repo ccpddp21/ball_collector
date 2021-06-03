@@ -5,11 +5,18 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private BooleanVariable _gamePausedVariable;
+    [SerializeField] private Rigidbody _rigidbody;
 
     private float _speed;
     private float _speedMultiplier;
     private float _horizontalVal;
     private float _verticalVal;
+
+    void Awake()
+    {
+        if (_rigidbody == null)
+            _rigidbody = GetComponent<Rigidbody>();
+    }
 
     void Start()
     {
@@ -17,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
         _speedMultiplier = 2f;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         _horizontalVal = Input.GetAxis("Horizontal");
         _verticalVal = Input.GetAxis("Vertical");
@@ -36,12 +42,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveForward(float axisVal)
     {
-        this.transform.Translate(new Vector3(0, 0, 1) * axisVal * Time.deltaTime * _speed);
+        _rigidbody.MovePosition(_rigidbody.position + (transform.forward * axisVal * Time.deltaTime * _speed));
     }
 
     private void Strafe(float axisVal)
     {
-        this.transform.Translate(new Vector3(1, 0, 0) * axisVal * Time.deltaTime * _speed);
+        _rigidbody.MovePosition(_rigidbody.position + (transform.right * axisVal * Time.deltaTime * _speed));
     }
     private bool DetectGround()
     {

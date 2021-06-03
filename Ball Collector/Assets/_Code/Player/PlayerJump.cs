@@ -22,8 +22,7 @@ public class PlayerJump : MonoBehaviour
         _jumpForce = 7;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space) && DetectGround())
         {
